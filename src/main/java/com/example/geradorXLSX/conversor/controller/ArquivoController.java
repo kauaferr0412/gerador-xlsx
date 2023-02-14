@@ -36,7 +36,7 @@ public class ArquivoController {
 	 * @param name the name to greet
 	 * @return greeting text
 	 * @throws IOException
-	 * ok
+	 * 
 	 */
 
 	@Autowired
