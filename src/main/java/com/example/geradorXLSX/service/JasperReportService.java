@@ -1,34 +1,20 @@
 package com.example.geradorXLSX.service;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
-import org.apache.commons.io.FileUtils;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
-
-import com.example.geradorXLSX.conversor.rede.models.eefi.Registro034;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -36,19 +22,17 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRXlsAbstractExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 
+@SuppressWarnings("deprecation")
 @Service
 public class JasperReportService {
-	
-	static final int TAMANHO_BUFFER = 4096; // 4kb
-	private byte[] dados = new byte[TAMANHO_BUFFER];
 
 	@SuppressWarnings("deprecation")
-	public byte[] exportReport(List<?> lista,  List<String> arquivos) throws JRException, IOException {
-		File file = ResourceUtils.getFile(new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\processamento_arquivo.jrxml");
+	public String exportReport(List<?> lista, String pathArquivoJasper, String pathArquivoCabecalho, String pathArquivoSalvar) throws JRException, IOException {
+		File file = ResourceUtils.getFile(pathArquivoJasper);
 		JasperReport jasper = JasperCompileManager.compileReport(file.getAbsolutePath());
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
 		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("CABECALHO", new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\cabecalho_report_old.jpg");
+		parameters.put("CABECALHO", pathArquivoCabecalho);
 		JasperPrint print = JasperFillManager.fillReport(jasper, parameters, dataSource);
 		try (ByteArrayOutputStream xlsReport = new ByteArrayOutputStream()) {
 				final JRXlsxExporter exporter = new JRXlsxExporter();
@@ -64,50 +48,16 @@ public class JasperReportService {
 				exporter.setParameter(JRXlsAbstractExporterParameter.IS_COLLAPSE_ROW_SPAN, Boolean.TRUE);
 				exporter.setParameter(JRXlsAbstractExporterParameter.IS_IGNORE_CELL_BORDER, Boolean.FALSE);
 				exporter.exportReport();
-				File targetFile = new File(new FileSystemResource("").getFile().getAbsolutePath() + "\\034_Ordem de Crédito.xlsx");
+				File targetFile = new File(pathArquivoSalvar);
 				try (OutputStream outStream = new FileOutputStream(targetFile)) {
 					outStream.write(xlsReport.toByteArray());
 					outStream.close();
 				}
+				return targetFile.getName();
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		return gerarBytesZip(arquivos);
-	}
-	
-	public byte[] gerarBytesZip(List<String> arquivos) throws IOException {
-		int cont;
-		BufferedInputStream origem = null;
-		FileInputStream streamDeEntrada = null;
-		FileOutputStream destino = null;
-		ZipOutputStream saida = null;
-		ZipEntry entry = null;
-		try {
-			destino = new FileOutputStream(new FileSystemResource("").getFile().getAbsolutePath() + "\\jasper.zip");
-			saida = new ZipOutputStream(new BufferedOutputStream(destino));
-			for (int contador = 0; contador < arquivos.size(); contador++) {
-				File fileTemp = new File(new FileSystemResource("").getFile().getAbsolutePath() + "\\" + arquivos.get(contador));
-				streamDeEntrada = new FileInputStream(fileTemp);
-				origem = new BufferedInputStream(streamDeEntrada, TAMANHO_BUFFER);
-				entry = new ZipEntry(fileTemp.getName());
-				saida.putNextEntry(entry);
-				while ((cont = origem.read(dados, 0, TAMANHO_BUFFER)) != -1) {
-					saida.write(dados, 0, cont);
-					
-				}
-				origem.close();
-				streamDeEntrada.close();
-				origem = null;
-				streamDeEntrada = null;
-			}
-			saida.close();
-			destino.close();
-		} catch (IOException e) {
-			throw new IOException(e.getMessage());
-		}
-		var fileTemp = new File(new FileSystemResource("").getFile().getAbsolutePath() + "\\jasper.zip");
-		var bytesFileTemp = FileUtils.readFileToByteArray(fileTemp);
-		fileTemp.delete();
-		return bytesFileTemp;
+		return pathArquivoSalvar;
 	}
 }

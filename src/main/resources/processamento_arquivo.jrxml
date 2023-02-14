@@ -41,7 +41,7 @@
 		<band height="38">
 			<property name="com.jaspersoft.studio.layout"/>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="140" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="c2b7ef6f-3526-4133-bac2-e24e0465afec"/>
+				<reportElement mode="Opaque" x="-10" y="0" width="150" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="c2b7ef6f-3526-4133-bac2-e24e0465afec"/>
 				<box>
 					<pen lineWidth="0.5" lineColor="#000000"/>
 				</box>
@@ -221,7 +221,7 @@
 				<text><![CDATA[Número de Parcelas Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1980" y="0" width="180" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="8582fcd0-d020-4a72-aab7-0e997d0a96f4"/>
+				<reportElement mode="Opaque" x="1980" y="0" width="190" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="8582fcd0-d020-4a72-aab7-0e997d0a96f4"/>
 				<box>
 					<pen lineWidth="0.5" lineColor="#000000"/>
 				</box>
@@ -235,7 +235,7 @@
 	<detail>
 		<band height="190">
 			<textField>
-				<reportElement x="0" y="0" width="140" height="80" uuid="ff07b3a6-3767-46ab-ac41-2eff225b3602"/>
+				<reportElement x="-10" y="0" width="150" height="80" uuid="ff07b3a6-3767-46ab-ac41-2eff225b3602"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -466,7 +466,7 @@
 				<textFieldExpression><![CDATA[$F{num_parcel_total}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
-				<reportElement x="1980" y="0" width="180" height="80" uuid="b2b70f3f-003a-4124-8796-61309f7bb423"/>
+				<reportElement x="1980" y="0" width="190" height="80" uuid="b2b70f3f-003a-4124-8796-61309f7bb423"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
