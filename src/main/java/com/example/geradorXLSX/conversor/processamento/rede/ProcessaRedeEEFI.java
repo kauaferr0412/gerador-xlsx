@@ -1,7 +1,11 @@
 package com.example.geradorXLSX.conversor.processamento.rede;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
@@ -11,9 +15,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.core.io.FileSystemResource;
 
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro034;
@@ -55,9 +62,16 @@ import com.example.geradorXLSX.service.JasperReportService;
 import net.sf.jasperreports.engine.JRException;
 
 public class ProcessaRedeEEFI {
-	private JasperReportService jasper = new JasperReportService();
 
-	public byte[] gerarPlanilhaRedeEEFI(File arquivoParam) throws IOException {
+	static final String PATH_JASPER = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\processamento_arquivo.jrxml";
+	static final String PATH_CABECALHO = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\cabecalho_report_old.jpg";
+	static final String PATH_ARQUIVO_034 = new FileSystemResource("").getFile().getAbsolutePath() + "\\034_Ordem de Crédito.xlsx";
+	static final int TAMANHO_BUFFER = 4096; // 4kb
+	private byte[] dados = new byte[TAMANHO_BUFFER];
+	
+	private JasperReportService jasper = new JasperReportService();
+	
+	public byte[] gerarPlanilhaRedeEEFI(File arquivoParam) throws IOException, JRException {
 		
 		//Start process
 		String path = arquivoParam.getPath();
@@ -1214,7 +1228,7 @@ public class ProcessaRedeEEFI {
 			arquivos.add(arquivoParam.getName());
 			//EEFI
 			if(registros034.size() > 0) {
-				 arquivos.add("034_Ordem de Crédito.xlsx");
+				 arquivos.add(jasper.exportReport(registros034, PATH_JASPER, PATH_CABECALHO, PATH_ARQUIVO_034));
 			}
 			if(registros035.size() > 0) {
 				start035.criarArquivo035("035_Ajustes Net e Desagendamento.xlsx", registros035);
@@ -1294,22 +1308,13 @@ public class ProcessaRedeEEFI {
 				 arquivos.add("069_ Desagendamento de parcelas.xlsx");
 
 			}
+
 			arq.close();	
-			try {
-				entrada.close();
-				byte[] bytesZip = jasper.exportReport(registros034, arquivos);
-				deletarArquivosTemporario(arquivos);
-				return bytesZip;
-			} catch (JRException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			JOptionPane.showMessageDialog(null, "Arquivos gerados no diretório raiz do projeto");
-			System.exit(0);
-			
-		}entrada.close();
-		return null;
+			entrada.close();
+			byte[] bytesZip = gerarBytesZip(arquivos);
+			deletarArquivosTemporario(arquivos);
+			return bytesZip;
+		}
 	}
 	public void deletarArquivosTemporario(List<String> arquivos) {
 		for (int contador = 0; contador < arquivos.size(); contador++) {
@@ -1327,5 +1332,44 @@ public class ProcessaRedeEEFI {
 	            e.printStackTrace();
 	        }		
 		}
+	}
+	
+
+	public byte[] gerarBytesZip(List<String> arquivos) throws IOException {
+		int cont;
+		BufferedInputStream origem = null;
+		FileInputStream streamDeEntrada = null;
+		FileOutputStream destino = null;
+		ZipOutputStream saida = null;
+		ZipEntry entry = null;
+		try {
+			destino = new FileOutputStream(new FileSystemResource("").getFile().getAbsolutePath() + "\\resultado_processamento_temp.zip");
+			saida = new ZipOutputStream(new BufferedOutputStream(destino));
+			for (int contador = 0; contador < arquivos.size(); contador++) {
+				File fileTemp = new File(new FileSystemResource("").getFile().getAbsolutePath() + "\\" + arquivos.get(contador));
+				streamDeEntrada = new FileInputStream(fileTemp);
+				origem = new BufferedInputStream(streamDeEntrada, TAMANHO_BUFFER);
+				entry = new ZipEntry(fileTemp.getName());
+				saida.putNextEntry(entry);
+				while ((cont = origem.read(dados, 0, TAMANHO_BUFFER)) != -1) {
+					saida.write(dados, 0, cont);
+					
+				}
+				origem.close();
+				streamDeEntrada.close();
+				origem = null;
+				streamDeEntrada = null;
+			}
+			saida.close();
+			destino.close();
+			saida = null;
+			destino = null;
+		} catch (IOException e) {
+			throw new IOException(e.getMessage());
+		}
+		var fileTemp = new File(new FileSystemResource("").getFile().getAbsolutePath() + "\\resultado_processamento_temp.zip");
+		var bytesFileTemp = FileUtils.readFileToByteArray(fileTemp);
+		fileTemp.delete();
+		return bytesFileTemp;
 	}
 }
