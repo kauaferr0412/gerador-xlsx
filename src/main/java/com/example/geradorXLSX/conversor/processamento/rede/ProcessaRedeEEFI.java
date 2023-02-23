@@ -1,6 +1,7 @@
 package com.example.geradorXLSX.conversor.processamento.rede;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedInputStream
+;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,20 +10,17 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.core.io.FileSystemResource;
 
+import com.example.geradorXLSX.conversor.processamento.LayoutIdentify;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro034;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro035;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro036;
@@ -40,7 +38,6 @@ import com.example.geradorXLSX.conversor.rede.models.eefi.Registro055;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro056;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro057;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro069;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha034;
 import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha035;
 import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha036;
 import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha038;
@@ -58,14 +55,17 @@ import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha056;
 import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha057;
 import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha069;
 import com.example.geradorXLSX.service.JasperReportService;
+import com.example.geradorXLSX.util.Util;
 
 import net.sf.jasperreports.engine.JRException;
 
 public class ProcessaRedeEEFI {
+    private static Logger logger = Logger.getLogger(LayoutIdentify.class);
 
-	static final String PATH_JASPER = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\processamento_arquivo.jrxml";
+	static final String PATH_JASPER = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasperReport\\processamento_arquivo_034.jrxml";
 	static final String PATH_CABECALHO = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\cabecalho_report_old.jpg";
 	static final String PATH_ARQUIVO_034 = new FileSystemResource("").getFile().getAbsolutePath() + "\\034_Ordem de Crédito.xlsx";
+	static final String NOME_ARQUIVO_TEMP = Util.getName("nome_arquivo_temporario");
 	static final int TAMANHO_BUFFER = 4096; // 4kb
 	private byte[] dados = new byte[TAMANHO_BUFFER];
 	
@@ -137,66 +137,28 @@ public class ProcessaRedeEEFI {
 					
 				
 			if(identifySubregistro[0].equals("034")){
-				Registro034 regis34 = new Registro034();
-				
-				subRegistro034[0] = identifySubregistro[0];
-				regis34.tipo_registro = subRegistro034[0];
-				
-				subRegistro034[1] = registro[controle].substring(3, 12);
-				regis34.num_pv_centralizador = subRegistro034[1];
-
-				subRegistro034[2] = registro[controle].substring(12, 23);
-				regis34.num_documento = subRegistro034[2];
-				
-				subRegistro034[3] = registro[controle].substring(23, 31);
-				regis34.data_lancamento = subRegistro034[3];
-				
-				subRegistro034[4] = registro[controle].substring(31, 46);
-				regis34.valor_lancamento = subRegistro034[4];
-				
-				subRegistro034[5] = registro[controle].substring(46, 47);
-				regis34.credito = subRegistro034[5];
-				
-				subRegistro034[6] = registro[controle].substring(47, 50);
-				regis34.banco = subRegistro034[6];
-				
-				subRegistro034[7] = registro[controle].substring(50, 56);
-				regis34.agencia = subRegistro034[7];
-				
-				subRegistro034[8] = registro[controle].substring(56, 67);
-				regis34.conta = subRegistro034[8];
-				
-				subRegistro034[9] = registro[controle].substring(67, 75);
-				regis34.data_movimento = subRegistro034[9];
-				
-				subRegistro034[10] = registro[controle].substring(75, 84);
-				regis34.num_rv = subRegistro034[10];
-				
-				subRegistro034[11] = registro[controle].substring(84, 92);
-				regis34.data_rv = subRegistro034[11];
-				
-				subRegistro034[12] = registro[controle].substring(92, 93);
-				regis34.bandeira = subRegistro034[12];
-				 
-				subRegistro034[13] = registro[controle].substring(93, 94);
-				regis34.tipo_de_transacao = subRegistro034[13];
-				
-				subRegistro034[14] = registro[controle].substring(94, 109);
-				regis34.valor_bruto_rv = subRegistro034[14];
-				
-				subRegistro034[15] = registro[controle].substring(109, 124);
-				regis34.valor_taxa_desconto = subRegistro034[15];
-				
-				subRegistro034[16] = registro[controle].substring(124, 129);
-				regis34.num_parcel_total = subRegistro034[16];
-				
-				subRegistro034[17] = registro[controle].substring(129, 131);
-				regis34.status_credito = subRegistro034[17];
-				
-				subRegistro034[18] = registro[controle].substring(131, 140);
-				regis34.num_pv_original = subRegistro034[18];
-				
-				registros034.add(regis34);
+				registros034.add(Registro034
+							.builder()
+							.tipo_registro(identifySubregistro[0])
+							.num_pv_centralizador(registro[controle].substring(3, 12))
+							.num_documento(registro[controle].substring(12, 23))
+							.data_lancamento(Util.converterStringToDate(registro[controle].substring(23, 31)))
+							.valor_lancamento(registro[controle].substring(31, 46))
+							.credito(registro[controle].substring(46, 47))
+							.banco(registro[controle].substring(47, 50))
+							.agencia(registro[controle].substring(50, 56))
+							.conta(registro[controle].substring(56, 67))
+							.data_movimento(Util.converterStringToDate(registro[controle].substring(67, 75)))
+							.num_rv(registro[controle].substring(75, 84))
+							.data_rv(Util.converterStringToDate(registro[controle].substring(84, 92)))
+							.bandeira(registro[controle].substring(92, 93))
+							.tipo_de_transacao(registro[controle].substring(93, 94))
+							.valor_bruto_rv(registro[controle].substring(94, 109))
+							.valor_taxa_desconto(registro[controle].substring(109, 124))
+							.num_parcel_total(registro[controle].substring(124, 129))
+							.status_credito(registro[controle].substring(129, 131))
+							.num_pv_original(registro[controle].substring(131, 140))
+							.build());
 				
 			}else if(identifySubregistro[0].equals("035")) {
 				Registro035 regis35 = new Registro035();
@@ -1205,7 +1167,6 @@ public class ProcessaRedeEEFI {
 			}
 			
 			//EEFI
-			MontarPlanilha034 start034 = new MontarPlanilha034();
 			MontarPlanilha035 start035 = new MontarPlanilha035();
 			MontarPlanilha036 start036 = new MontarPlanilha036();
 			MontarPlanilha053 start053 = new MontarPlanilha053();
@@ -1308,31 +1269,14 @@ public class ProcessaRedeEEFI {
 				 arquivos.add("069_ Desagendamento de parcelas.xlsx");
 
 			}
-
 			arq.close();	
 			entrada.close();
 			byte[] bytesZip = gerarBytesZip(arquivos);
-			deletarArquivosTemporario(arquivos);
+			Util.deletarArquivosTemporario(arquivos);
 			return bytesZip;
 		}
 	}
-	public void deletarArquivosTemporario(List<String> arquivos) {
-		for (int contador = 0; contador < arquivos.size(); contador++) {
-			Path pathArquivosGerados = Paths.get(new FileSystemResource("").getFile().getAbsolutePath() + "\\" + arquivos.get(contador));
-			try {
-	            boolean result = Files.deleteIfExists(pathArquivosGerados);
-	            if (result) {
-	                System.out.println("Arquivo temporário deletado com sucesso.");
-	            }
-	            else {
-	                System.out.println("Falha ao deletar arquivo temporário");
-	            }
-	        }
-	        catch (IOException e) {
-	            e.printStackTrace();
-	        }		
-		}
-	}
+	
 	
 
 	public byte[] gerarBytesZip(List<String> arquivos) throws IOException {
@@ -1343,7 +1287,7 @@ public class ProcessaRedeEEFI {
 		ZipOutputStream saida = null;
 		ZipEntry entry = null;
 		try {
-			destino = new FileOutputStream(new FileSystemResource("").getFile().getAbsolutePath() + "\\resultado_processamento_temp.zip");
+			destino = new FileOutputStream(new FileSystemResource("").getFile().getAbsolutePath() + NOME_ARQUIVO_TEMP);
 			saida = new ZipOutputStream(new BufferedOutputStream(destino));
 			for (int contador = 0; contador < arquivos.size(); contador++) {
 				File fileTemp = new File(new FileSystemResource("").getFile().getAbsolutePath() + "\\" + arquivos.get(contador));
@@ -1367,7 +1311,7 @@ public class ProcessaRedeEEFI {
 		} catch (IOException e) {
 			throw new IOException(e.getMessage());
 		}
-		var fileTemp = new File(new FileSystemResource("").getFile().getAbsolutePath() + "\\resultado_processamento_temp.zip");
+		var fileTemp = new File(new FileSystemResource("").getFile().getAbsolutePath() + NOME_ARQUIVO_TEMP);
 		var bytesFileTemp = FileUtils.readFileToByteArray(fileTemp);
 		fileTemp.delete();
 		return bytesFileTemp;
