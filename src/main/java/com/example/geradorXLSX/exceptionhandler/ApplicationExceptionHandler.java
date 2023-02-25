@@ -1,6 +1,5 @@
 package com.example.geradorXLSX.exceptionhandler;
 
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -162,19 +161,6 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
 
-	@ExceptionHandler(AccessDeniedException.class)
-	public ResponseEntity<Object> handleEntidadeNaoEncontrada(AccessDeniedException ex, WebRequest request) {
-
-		HttpStatus status = HttpStatus.FORBIDDEN;
-		ProblemType problemType = ProblemType.ACESSO_NAO_AUTORIZADO;
-		String detail = ex.getMessage();
-
-		Problem problem = createProblemBuilder(status, problemType, detail).userMessage(detail)
-				.userMessage(messageHelper.getMensagem("msg_aviso_sem_permissao")).build();
-
-		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
-	}
-
 	@ExceptionHandler(RecursoNaoEncontradoException.class)
 	public ResponseEntity<Object> handleEntidadeNaoEncontrada(RecursoNaoEncontradoException ex, WebRequest request) {
 
@@ -200,7 +186,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 	}
 
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
-	public ResponseEntity handleMaxSizeException(MaxUploadSizeExceededException ex, WebRequest request) {
+	public ResponseEntity<?> handleMaxSizeException(MaxUploadSizeExceededException ex, WebRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		ProblemType problemType = ProblemType.ERRO_NEGOCIO;
 		String detail = ex.getMessage();

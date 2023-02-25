@@ -257,7 +257,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{num_documento}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="100" y="0" width="140" height="80" uuid="fe6a79f7-0056-4f53-b594-6decbe14ba40"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -270,7 +270,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor_lancamento}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="380" y="0" width="210" height="80" uuid="30352df1-ab67-40c4-8484-7bdff45f625f"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -283,7 +283,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{num_pv_centralizador}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="590" y="0" width="139" height="80" uuid="ee1a64bb-0e35-4e7d-883e-cac35b55dd1c"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -296,7 +296,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{data_lancamento}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="730" y="0" width="90" height="80" uuid="c698c995-c26e-441d-baf5-cde5f9c4c24b"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -309,7 +309,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{banco}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="820" y="0" width="80" height="80" uuid="ab474028-d45f-4cd7-9dff-303aa244349a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -322,7 +322,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{agencia}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="900" y="0" width="90" height="80" uuid="804a845e-2089-469a-96c8-615e64908b19"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -335,7 +335,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{conta}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="990" y="0" width="110" height="80" uuid="d88cc070-dbff-420c-8306-27cea47bf35a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -348,7 +348,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipo_de_transacao}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1100" y="0" width="90" height="80" uuid="d0d76830-a9d1-448f-8a20-9c7256a80faa"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -361,7 +361,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{status_credito}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1190" y="0" width="60" height="80" uuid="c44fa424-d8eb-45d0-9eb3-d1f3266e788d"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -374,7 +374,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1250" y="0" width="110" height="80" uuid="e93dd2aa-8f20-4cc8-ad2a-c862d4b6aec2"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -387,7 +387,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{data_movimento}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1360" y="0" width="90" height="80" uuid="a4e71862-7c9e-4475-a69f-0e42b4ca3f5a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -400,7 +400,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{num_rv}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1450" y="0" width="80" height="80" uuid="09d9cfcc-587e-42d4-8c2d-be35c8f35492"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -413,7 +413,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{data_rv}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1530" y="0" width="90" height="80" uuid="a397fc69-5095-4459-9766-9e74b8435057"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -426,7 +426,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bandeira}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1620" y="0" width="120" height="80" uuid="0eff89d2-e750-4ded-8d5e-1fbd81a87342"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -439,7 +439,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor_bruto_rv}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1740" y="0" width="150" height="80" uuid="0518d297-5f10-41f9-a451-a463ce343cae"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -452,7 +452,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor_taxa_desconto}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1890" y="0" width="200" height="80" uuid="8d517a13-04d5-4a0d-a6ba-5fb4d9bfbc14"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -465,7 +465,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{num_parcel_total}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="2090" y="0" width="170" height="80" uuid="b2b70f3f-003a-4124-8796-61309f7bb423"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>

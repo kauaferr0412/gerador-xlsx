@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -26,12 +28,18 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
 @Service
 public class JasperReportService {
 
-	public String exportReport(List<?> lista, String pathArquivoJasper, String pathArquivoCabecalho, String pathArquivoSalvar) throws JRException, IOException {
+	private static Logger logger = Logger.getLogger(JasperReportService.class);
+	static final String PATH_CABECALHO = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\cabecalho_report_old.jpg";
+	static final String CABECALHO = "CABECALHO";
+
+	public String exportReport(List<?> lista, String pathArquivoJasper, String pathArquivoSalvar) throws JRException, IOException {
+		File targetFile = new File(pathArquivoSalvar);
+		logger.info("GERANDO ARQUIVO: " + targetFile.getName().replace("\\", ""));
 		File file = ResourceUtils.getFile(pathArquivoJasper);
 		JasperReport jasper = JasperCompileManager.compileReport(file.getAbsolutePath());
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);
 		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("CABECALHO", pathArquivoCabecalho);
+		parameters.put(CABECALHO, PATH_CABECALHO);
 		JasperPrint print = JasperFillManager.fillReport(jasper, parameters, dataSource);
 		try (ByteArrayOutputStream xlsReport = new ByteArrayOutputStream()) {
 			JRXlsxExporter exporter = new JRXlsxExporter();
@@ -49,16 +57,16 @@ public class JasperReportService {
 			configuration.setIgnoreCellBorder(false);
 			exporter.setConfiguration(configuration);
 			exporter.exportReport();
-			File targetFile = new File(pathArquivoSalvar);
 			try (OutputStream outStream = new FileOutputStream(targetFile)) {
 				outStream.write(xlsReport.toByteArray());
 				outStream.close();
 			}
+			logger.info("ARQUIVO GERADO COM SUCESSO");
 			return targetFile.getName();
-
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.info("ERRO AO PROCESSAR O ARQUIVO: " + targetFile.getName().replace("\\", ""));
+			logger.error(e.getMessage());
 		}
-		return pathArquivoSalvar;
+		return targetFile.getName();
 	}
 }

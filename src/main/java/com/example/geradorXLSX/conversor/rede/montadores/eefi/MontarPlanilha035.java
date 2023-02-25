@@ -15,7 +15,8 @@ import com.example.geradorXLSX.conversor.processamento.LayoutIdentify;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro035;
 
 public class MontarPlanilha035 {
-	private static Logger logger = Logger.getLogger(LayoutIdentify.class);
+	
+	private static Logger logger = Logger.getLogger(MontarPlanilha035.class);
 
 	public void criarArquivo035(final String nomeArquivo, final List<Registro035> registros035) {
 
@@ -72,8 +73,10 @@ public class MontarPlanilha035 {
 			outputStream.close();
 		} catch (FileNotFoundException e) {
 			logger.error("ARQUIVO NÃO ENCONTRADO: " + nomeArquivo);
+			logger.error(e.getMessage());
 		} catch (IOException e) {
 			logger.error("ERRO AO PROCESSARO O ARQUIVO " + nomeArquivo);
+			logger.error(e.getMessage());
 		}
 		logger.info("ARQUIVO GERADO COM SUCESSO");
 	}

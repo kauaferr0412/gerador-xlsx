@@ -14,19 +14,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.geradorXLSX.conversor.processamento.LayoutIdentify;
 import com.example.geradorXLSX.openAPI.ArquivoControllerOpenApi;
-import com.example.geradorXLSX.util.Util;
 
 @RestController
 @RequestMapping(path = "/v1/")
 public class ArquivoController implements ArquivoControllerOpenApi {
-	
-	static final int TAMANHO_BUFFER = 4096; // 4kb
 
-	@RequestMapping(value = "/processar", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	private static final String ATTACHMENT_FILE = "attachment;filename=resultado_processamento.zip";
+	
+	@RequestMapping(value = "/gerarXlsx", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> processarArquivo(@RequestParam("file") MultipartFile file) throws IOException {
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=resultado_processamento.zip")
-				.contentType(MediaType.parseMediaType("application/zip")).body(LayoutIdentify.identify(Util.criarArquivoTemporario(file)));
+				.header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, ATTACHMENT_FILE)
+				.contentType(MediaType.parseMediaType("application/zip")).body(LayoutIdentify.processarArquivos(file));
 	}
 }
