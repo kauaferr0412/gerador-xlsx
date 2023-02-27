@@ -2,3 +2,25 @@ server:
     port: 8082
     servlet:
         context-path: /gerador-xlsx
+
+documentacao:
+    api:
+        titulo: Documentação do projeto Gerador XLSX
+        versao: V1
+        descricao: Gerador XLSX
+        externo:
+            descricao: Gerador XLSX
+            url: http://localhost:8082/gerador-xlsx
+            
+springdoc:
+    packages-to-scan: com.example.geradorXLSX
+    paths-to-match: /v1/**
+
+spring:
+    servlet:
+        multipart:
+            max-file-size: 2MB
+            max-request-size: 2MB
+        
+logging:
+  config: classpath:logback.xml

@@ -1,0 +1,9 @@
+${AnsiColor.BRIGHT_GREEN}(  ____ \(  ____ \(  ____ )(  ___  )(  __  \ (  ___  )(  ____ )  |\     /|( \     (  ____ \|\     /|
+${AnsiColor.BRIGHT_GREEN}| (    \/| (    \/| (    )|| (   ) || (  \  )| (   ) || (    )|  ( \   / )| (     | (    \/( \   / )
+${AnsiColor.BRIGHT_GREEN}| |      | (__    | (____)|| (___) || |   ) || |   | || (____)|   \ (_) / | |     | (_____  \ (_) / 
+${AnsiColor.BRIGHT_GREEN}| | ____ |  __)   |     __)|  ___  || |   | || |   | ||     __)    ) _ (  | |     (_____  )  ) _ ( 
+${AnsiColor.BRIGHT_GREEN}| | \_  )| (      | (\ (   | (   ) || |   ) || |   | || (\ (      / ( ) \ | |           ) | / ( ) \
+${AnsiColor.BRIGHT_GREEN}| (___) || (____/\| ) \ \__| )   ( || (__/  )| (___) || ) \ \__  ( /   \ )| (____/Y\____) |( /   \ )
+${AnsiColor.BRIGHT_GREEN}(_______)(_______/|/   \__/|/     \|(______/ (_______)|/   \__/  |/     \|(_______|_______)|/     \|
+${AnsiColor.BRIGHT_GREEN}Boavista Tecnologia
+${AnsiColor.WHITE}
