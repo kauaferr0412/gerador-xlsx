@@ -85,7 +85,7 @@ public class MontarPlanilha047 {
         adicionarCelula047(linha, 17, "Banco");
         adicionarCelula047(linha, 18, "Agência");
         adicionarCelula047(linha, 19, "Conta");
-        adicionarCelula047(linha, 20, "Status do crédito ");
+        adicionarCelula047(linha, 20, "Status do crédito");
         adicionarCelula047(linha, 21, "Parcela");        
     }
 	
