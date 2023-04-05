@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.springframework.core.io.FileSystemResource;
-
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro034;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro035;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro036;
@@ -30,48 +28,13 @@ import com.example.geradorXLSX.conversor.rede.models.eefi.Registro057;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro069;
 import com.example.geradorXLSX.service.JasperReportService;
 import com.example.geradorXLSX.util.FileUtil;
+import com.example.geradorXLSX.util.PathFilesRedeEefiConstants;
+import com.example.geradorXLSX.util.PathJasperRedeEefiConstants;
 import com.example.geradorXLSX.util.Util;
 
 import net.sf.jasperreports.engine.JRException;
 
 public class ProcessaRedeEEFI {
-
-	static final String PATH_JASPER_034 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_034.jrxml";
-	static final String PATH_JASPER_035 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_035.jrxml";
-	static final String PATH_JASPER_036 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_036.jrxml";
-	static final String PATH_JASPER_038 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_038.jrxml";
-	static final String PATH_JASPER_043 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_043.jrxml";
-	static final String PATH_JASPER_044 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_044.jrxml";
-	static final String PATH_JASPER_045 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_045.jrxml";
-	static final String PATH_JASPER_046 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_046.jrxml";
-	static final String PATH_JASPER_047 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_047.jrxml";
-	static final String PATH_JASPER_048 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_048.jrxml";
-	static final String PATH_JASPER_049 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_049.jrxml";
-	static final String PATH_JASPER_053 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_053.jrxml";
-	static final String PATH_JASPER_054 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_054.jrxml";
-	static final String PATH_JASPER_055 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_055.jrxml";
-	static final String PATH_JASPER_056 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_056.jrxml";
-	static final String PATH_JASPER_057 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_057.jrxml";
-	static final String PATH_JASPER_069 = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasper_templates\\processamento_arquivo_069.jrxml";
-	static final String PATH_CABECALHO = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\cabecalho_report_old.jpg";
-	static final String PATH_ARQUIVO_034 = new FileSystemResource("").getFile().getAbsolutePath() + "\\034_Ordem de Crédito.xlsx";
-	static final String PATH_ARQUIVO_035 = new FileSystemResource("").getFile().getAbsolutePath() + "\\035_Ajustes Net e Desagendamento.xlsx";
-	static final String PATH_ARQUIVO_036 = new FileSystemResource("").getFile().getAbsolutePath() + "\\036_Antecipações.xlsx";
-	static final String PATH_ARQUIVO_038 = new FileSystemResource("").getFile().getAbsolutePath() + "\\038_Ajustes a débito(Via Banco).xlsx";
-	static final String PATH_ARQUIVO_043 = new FileSystemResource("").getFile().getAbsolutePath() + "\\043_Ajustes a Créditos.xlsx";
-	static final String PATH_ARQUIVO_044 = new FileSystemResource("").getFile().getAbsolutePath() + "\\044_Débitos Pendentes.xlsx";
-	static final String PATH_ARQUIVO_045 = new FileSystemResource("").getFile().getAbsolutePath() + "\\045_Débitos liquidados.xlsx";
-	static final String PATH_ARQUIVO_046 = new FileSystemResource("").getFile().getAbsolutePath() + "\\046_Transações Negociadas e Liquidadas(vendas crédito).xlsx";
-	static final String PATH_ARQUIVO_047 = new FileSystemResource("").getFile().getAbsolutePath() + "\\047_Transações em negociação(vendas crédito).xlsx";
-	static final String PATH_ARQUIVO_048 = new FileSystemResource("").getFile().getAbsolutePath() + "\\048_Negociações desfeitas.xlsx";
-	static final String PATH_ARQUIVO_049 = new FileSystemResource("").getFile().getAbsolutePath() + "\\049_Desagendamento de parcelas.xlsx";
-	static final String PATH_ARQUIVO_053 = new FileSystemResource("").getFile().getAbsolutePath() + "\\053_Ajustes Net e Desagendamentos (E-Commerce).xlsx";
-	static final String PATH_ARQUIVO_054 = new FileSystemResource("").getFile().getAbsolutePath() + "\\054_Ajustes a Débito(via Banco- E-Commerce).xlsx";
-	static final String PATH_ARQUIVO_055 = new FileSystemResource("").getFile().getAbsolutePath() + "\\055_Débitos Pendentes(E-Commerce).xlsx";
-	static final String PATH_ARQUIVO_056 = new FileSystemResource("").getFile().getAbsolutePath() + "\\056_Débitos Liquidados(E-Commerce).xlsx";
-	static final String PATH_ARQUIVO_057 = new FileSystemResource("").getFile().getAbsolutePath() + "\\057_Desagendamento de parcelas (e-commerce).xlsx";
-	static final String PATH_ARQUIVO_069 = new FileSystemResource("").getFile().getAbsolutePath() + "\\069_ Desagendamento de parcelas.xlsx";
-	
 	static final int TAMANHO_BUFFER = 4096; // 4kb
 	private byte[] dados = new byte[TAMANHO_BUFFER];
 
@@ -1174,55 +1137,89 @@ public class ProcessaRedeEEFI {
 			arquivos.add(arquivoParam.getName());
 			//EEFI
 			if(registros034.size() > 0) {
-				arquivos.add(jasper.exportReport(registros034, PATH_JASPER_034,  PATH_ARQUIVO_034));
+				arquivos.add(jasper.exportReport(registros034, 
+						PathJasperRedeEefiConstants.PATH_JASPER_034,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_034));
 			}
 			if(registros035.size() > 0) {
-				arquivos.add(jasper.exportReport(registros035, PATH_JASPER_035,  PATH_ARQUIVO_035));
+				arquivos.add(jasper.exportReport(registros035, 
+						PathJasperRedeEefiConstants.PATH_JASPER_035,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_035));
 			}
 			if(registros036.size() > 0) {
-				arquivos.add(jasper.exportReport(registros036, PATH_JASPER_036,  PATH_ARQUIVO_036));
+				arquivos.add(jasper.exportReport(registros036, 
+						PathJasperRedeEefiConstants.PATH_JASPER_036,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_036));
 			}
 			if(registros038.size() > 0) {
-				arquivos.add(jasper.exportReport(registros038, PATH_JASPER_038,  PATH_ARQUIVO_038));
+				arquivos.add(jasper.exportReport(registros038, 
+						PathJasperRedeEefiConstants.PATH_JASPER_038,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_038));
 			}
 			if(registros043.size() > 0) {
-				arquivos.add(jasper.exportReport(registros043, PATH_JASPER_043,  PATH_ARQUIVO_043));
+				arquivos.add(jasper.exportReport(registros043, 
+						PathJasperRedeEefiConstants.PATH_JASPER_043,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_043));
 			}
 			if(registros044.size() > 0) {
-				arquivos.add(jasper.exportReport(registros044, PATH_JASPER_044,  PATH_ARQUIVO_044));
+				arquivos.add(jasper.exportReport(registros044, 
+						PathJasperRedeEefiConstants.PATH_JASPER_044,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_044));
 			}
 			if(registros045.size() > 0) {
-				arquivos.add(jasper.exportReport(registros045, PATH_JASPER_045,  PATH_ARQUIVO_045));
+				arquivos.add(jasper.exportReport(registros045, 
+						PathJasperRedeEefiConstants.PATH_JASPER_045,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_045));
 			}
 			if(registros046.size() > 0) {
-				arquivos.add(jasper.exportReport(registros046, PATH_JASPER_046,  PATH_ARQUIVO_046));
+				arquivos.add(jasper.exportReport(registros046, 
+						PathJasperRedeEefiConstants.PATH_JASPER_046,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_046));
 			}
 			if(registros047.size() > 0) {
-				arquivos.add(jasper.exportReport(registros047, PATH_JASPER_047,  PATH_ARQUIVO_047));
+				arquivos.add(jasper.exportReport(registros047, 
+						PathJasperRedeEefiConstants.PATH_JASPER_047,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_047));
 			}
 			if(registros048.size() > 0) {
-				arquivos.add(jasper.exportReport(registros048, PATH_JASPER_048,  PATH_ARQUIVO_048));
+				arquivos.add(jasper.exportReport(registros048, 
+						PathJasperRedeEefiConstants.PATH_JASPER_048,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_048));
 			}
 			if(registros049.size() > 0) {
-				arquivos.add(jasper.exportReport(registros049, PATH_JASPER_049,  PATH_ARQUIVO_049));
+				arquivos.add(jasper.exportReport(registros049, 
+						PathJasperRedeEefiConstants.PATH_JASPER_049,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_049));
 			}
 			if(registros053.size() > 0) {
-				arquivos.add(jasper.exportReport(registros053, PATH_JASPER_053,  PATH_ARQUIVO_053));
+				arquivos.add(jasper.exportReport(registros053, 
+						PathJasperRedeEefiConstants.PATH_JASPER_053,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_053));
 			}
 			if(registros054.size() > 0) {
-				arquivos.add(jasper.exportReport(registros054, PATH_JASPER_054,  PATH_ARQUIVO_054));
+				arquivos.add(jasper.exportReport(registros054, 
+						PathJasperRedeEefiConstants.PATH_JASPER_054,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_054));
 			}
 			if(registros055.size() > 0) {
-				arquivos.add(jasper.exportReport(registros055, PATH_JASPER_055, PATH_ARQUIVO_055));
+				arquivos.add(jasper.exportReport(registros055, 
+						PathJasperRedeEefiConstants.PATH_JASPER_055, 
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_055));
 			}
 			if(registros056.size() >0) {
-				arquivos.add(jasper.exportReport(registros056, PATH_JASPER_056, PATH_ARQUIVO_056));
+				arquivos.add(jasper.exportReport(registros056, 
+						PathJasperRedeEefiConstants.PATH_JASPER_056, 
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_056));
 			}
 			if(registros057.size() > 0) {
-				arquivos.add(jasper.exportReport(registros057, PATH_JASPER_057, PATH_ARQUIVO_057));
+				arquivos.add(jasper.exportReport(registros057, 
+						PathJasperRedeEefiConstants.PATH_JASPER_057, 
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_057));
 			}
 			if(registros069.size() > 0) {
-				arquivos.add(jasper.exportReport(registros069, PATH_JASPER_069, PATH_ARQUIVO_069));
+				arquivos.add(jasper.exportReport(registros069, 
+						PathJasperRedeEefiConstants.PATH_JASPER_069, 
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_069));
 
 			}
 			arq.close();
