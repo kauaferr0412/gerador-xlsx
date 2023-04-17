@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.springframework.core.io.FileSystemResource;
-
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro034;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro035;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro036;
@@ -28,33 +26,18 @@ import com.example.geradorXLSX.conversor.rede.models.eefi.Registro055;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro056;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro057;
 import com.example.geradorXLSX.conversor.rede.models.eefi.Registro069;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha035;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha036;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha038;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha043;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha044;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha045;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha046;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha047;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha048;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha049;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha053;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha054;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha055;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha056;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha057;
-import com.example.geradorXLSX.conversor.rede.montadores.eefi.MontarPlanilha069;
 import com.example.geradorXLSX.service.JasperReportService;
 import com.example.geradorXLSX.util.FileUtil;
-import com.example.geradorXLSX.util.MessageHelper;
+import com.example.geradorXLSX.util.PathFilesRedeEefiConstants;
+import com.example.geradorXLSX.util.PathJasperRedeEefiConstants;
 import com.example.geradorXLSX.util.Util;
 
 import net.sf.jasperreports.engine.JRException;
 
 public class ProcessaRedeEEFI {
-	
-	static final String PATH_JASPER = new FileSystemResource("").getFile().getAbsolutePath() + "\\src\\main\\resources\\jasperReport\\processamento_arquivo_034.jrxml";
-	static final String PATH_ARQUIVO_034 = new FileSystemResource("").getFile().getAbsolutePath() + "\\034_Ordem de Crédito.xlsx";
+	static final int TAMANHO_BUFFER = 4096; // 4kb
+	private byte[] dados = new byte[TAMANHO_BUFFER];
+
 	static final String NOME_ARQUIVO_TEMP_ZIP = "\\resultado_processamento_temp_eefi.zip";
 	private JasperReportService jasper = new JasperReportService();
 
@@ -1147,107 +1130,96 @@ public class ProcessaRedeEEFI {
 
 				linhaLeitura.close();
 			}
-
-			// EEFI
-			MontarPlanilha035 start035 = new MontarPlanilha035();
-			MontarPlanilha036 start036 = new MontarPlanilha036();
-			MontarPlanilha053 start053 = new MontarPlanilha053();
-			MontarPlanilha038 start038 = new MontarPlanilha038();
-			MontarPlanilha054 start054 = new MontarPlanilha054();
-			MontarPlanilha043 start043 = new MontarPlanilha043();
-			MontarPlanilha046 start046 = new MontarPlanilha046();
-			MontarPlanilha047 start047 = new MontarPlanilha047();
-			MontarPlanilha055 start055 = new MontarPlanilha055();
-			MontarPlanilha056 start056 = new MontarPlanilha056();
-			MontarPlanilha057 start057 = new MontarPlanilha057();
-			MontarPlanilha048 start048 = new MontarPlanilha048();
-			MontarPlanilha044 start044 = new MontarPlanilha044();
-			MontarPlanilha045 start045 = new MontarPlanilha045();
-			MontarPlanilha049 start049 = new MontarPlanilha049();
-			MontarPlanilha069 start069 = new MontarPlanilha069();
+	
 
 			// Null validation
 			List<String> arquivos = new ArrayList<>();
 			arquivos.add(arquivoParam.getName());
-			// EEFI
-			if (registros034.size() > 0) {
-				arquivos.add(jasper.exportReport(registros034, PATH_JASPER, PATH_ARQUIVO_034));
+			//EEFI
+			if(registros034.size() > 0) {
+				arquivos.add(jasper.exportReport(registros034, 
+						PathJasperRedeEefiConstants.PATH_JASPER_034,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_034));
 			}
-			if (registros035.size() > 0) {
-				start035.criarArquivo035("035_Ajustes Net e Desagendamento.xlsx", registros035);
-				arquivos.add("035_Ajustes Net e Desagendamento.xlsx");
+			if(registros035.size() > 0) {
+				arquivos.add(jasper.exportReport(registros035, 
+						PathJasperRedeEefiConstants.PATH_JASPER_035,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_035));
 			}
-			if (registros036.size() > 0) {
-				start036.criarArquivo036("036_Antecipações.xlsx", registros036);
-				arquivos.add("036_Antecipações.xlsx");
+			if(registros036.size() > 0) {
+				arquivos.add(jasper.exportReport(registros036, 
+						PathJasperRedeEefiConstants.PATH_JASPER_036,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_036));
 			}
-			if (registros038.size() > 0) {
-				start038.criarArquivo038("038_Ajustes a débito(Via Banco).xlsx", registros038);
-				arquivos.add("038_Ajustes a débito(Via Banco).xlsx");
+			if(registros038.size() > 0) {
+				arquivos.add(jasper.exportReport(registros038, 
+						PathJasperRedeEefiConstants.PATH_JASPER_038,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_038));
 			}
-			if (registros043.size() > 0) {
-				start043.criarArquivo043("043_Ajustes a Créditos.xlsx", registros043);
-				arquivos.add("043_Ajustes a Créditos.xlsx");
-
+			if(registros043.size() > 0) {
+				arquivos.add(jasper.exportReport(registros043, 
+						PathJasperRedeEefiConstants.PATH_JASPER_043,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_043));
 			}
-			if (registros044.size() > 0) {
-				start044.criarArquivo044("044_Débitos Pendentes.xlsx", registros044);
-				arquivos.add("044_Débitos Pendentes.xlsx");
-
+			if(registros044.size() > 0) {
+				arquivos.add(jasper.exportReport(registros044, 
+						PathJasperRedeEefiConstants.PATH_JASPER_044,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_044));
 			}
-			if (registros045.size() > 0) {
-				start045.criarArquivo045("045_Débitos liquidados.xlsx", registros045);
-				arquivos.add("045_Débitos liquidados.xlsx");
-
+			if(registros045.size() > 0) {
+				arquivos.add(jasper.exportReport(registros045, 
+						PathJasperRedeEefiConstants.PATH_JASPER_045,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_045));
 			}
-			if (registros046.size() > 0) {
-				start046.criarArquivo046("046_Transações Negociadas e Liquidadas(vendas crédito).xlsx", registros046);
-				arquivos.add("046_Transações Negociadas e Liquidadas(vendas crédito).xlsx");
-
+			if(registros046.size() > 0) {
+				arquivos.add(jasper.exportReport(registros046, 
+						PathJasperRedeEefiConstants.PATH_JASPER_046,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_046));
 			}
-			if (registros047.size() > 0) {
-				start047.criarArquivo047("047_Transações em negociação(vendas crédito).xlsx", registros047);
-				arquivos.add("047_Transações em negociação(vendas crédito).xlsx");
-
+			if(registros047.size() > 0) {
+				arquivos.add(jasper.exportReport(registros047, 
+						PathJasperRedeEefiConstants.PATH_JASPER_047,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_047));
 			}
-			if (registros048.size() > 0) {
-				start048.criarArquivo048("048_Negociações desfeitas.xlsx", registros048);
-				arquivos.add("048_Negociações desfeitas.xlsx");
-
+			if(registros048.size() > 0) {
+				arquivos.add(jasper.exportReport(registros048, 
+						PathJasperRedeEefiConstants.PATH_JASPER_048,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_048));
 			}
-			if (registros049.size() > 0) {
-				start049.criarArquivo049("049_Desagendamento de parcelas.xlsx", registros049);
-				arquivos.add("049_Desagendamento de parcelas.xlsx");
-
+			if(registros049.size() > 0) {
+				arquivos.add(jasper.exportReport(registros049, 
+						PathJasperRedeEefiConstants.PATH_JASPER_049,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_049));
 			}
-			if (registros053.size() > 0) {
-				start053.criarArquivo053("053_Ajustes Net e Desagendamentos (E-Commerce).xlsx", registros053);
-				arquivos.add("053_Ajustes Net e Desagendamentos (E-Commerce).xlsx");
-
+			if(registros053.size() > 0) {
+				arquivos.add(jasper.exportReport(registros053, 
+						PathJasperRedeEefiConstants.PATH_JASPER_053,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_053));
 			}
-			if (registros054.size() > 0) {
-				start054.criarArquivo054("054_Ajustes a Débito(via Banco- E-Commerce).xlsx", registros054);
-				arquivos.add("054_Ajustes a Débito(via Banco- E-Commerce).xlsx");
-
+			if(registros054.size() > 0) {
+				arquivos.add(jasper.exportReport(registros054, 
+						PathJasperRedeEefiConstants.PATH_JASPER_054,  
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_054));
 			}
-			if (registros055.size() > 0) {
-				start055.criarArquivo055("055_Débitos Pendentes(E-Commerce).xlsx", registros055);
-				arquivos.add("055_Débitos Pendentes(E-Commerce).xlsx");
-
+			if(registros055.size() > 0) {
+				arquivos.add(jasper.exportReport(registros055, 
+						PathJasperRedeEefiConstants.PATH_JASPER_055, 
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_055));
 			}
-			if (registros056.size() > 0) {
-				start056.criarArquivo056("056_Débitos Liquidados(E-Commerce).xlsx", registros056);
-				arquivos.add("056_Débitos Liquidados(E-Commerce).xlsx");
-
+			if(registros056.size() >0) {
+				arquivos.add(jasper.exportReport(registros056, 
+						PathJasperRedeEefiConstants.PATH_JASPER_056, 
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_056));
 			}
-			if (registros057.size() > 0) {
-				start057.criarArquivo057("057_Desagendamento de parcelas (e-commerce).xlsx", registros057);
-				arquivos.add("057_Desagendamento de parcelas (e-commerce).xlsx");
-
+			if(registros057.size() > 0) {
+				arquivos.add(jasper.exportReport(registros057, 
+						PathJasperRedeEefiConstants.PATH_JASPER_057, 
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_057));
 			}
-			if (registros069.size() > 0) {
-				start069.criarArquivo069("069_ Desagendamento de parcelas.xlsx", registros069);
-				arquivos.add("069_ Desagendamento de parcelas.xlsx");
+			if(registros069.size() > 0) {
+				arquivos.add(jasper.exportReport(registros069, 
+						PathJasperRedeEefiConstants.PATH_JASPER_069, 
+						PathFilesRedeEefiConstants.PATH_ARQUIVO_069));
 
 			}
 			arq.close();

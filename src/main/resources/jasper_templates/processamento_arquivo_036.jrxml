@@ -10,25 +10,24 @@
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
-	<field name="tipo_registro" class="java.lang.String"/>
-	<field name="num_documento" class="java.lang.String"/>
-	<field name="valor_lancamento" class="java.lang.String"/>
-	<field name="num_pv_centralizador" class="java.lang.String"/>
-	<field name="data_lancamento" class="java.lang.String"/>
+	<field name="tipoRegistro" class="java.lang.String"/>
+	<field name="numPV" class="java.lang.String"/>
+	<field name="numDocumento" class="java.lang.String"/>
+	<field name="dataLancamento" class="java.lang.String"/>
+	<field name="valorLancamento" class="java.lang.String"/>
+	<field name="credito" class="java.lang.String"/>
 	<field name="banco" class="java.lang.String"/>
 	<field name="agencia" class="java.lang.String"/>
 	<field name="conta" class="java.lang.String"/>
-	<field name="tipo_de_transacao" class="java.lang.String"/>
-	<field name="status_credito" class="java.lang.String"/>
-	<field name="credito" class="java.lang.String"/>
-	<field name="data_movimento" class="java.lang.String"/>
-	<field name="num_rv" class="java.lang.String"/>
-	<field name="data_rv" class="java.lang.String"/>
+	<field name="numRvCorresp" class="java.lang.String"/>
+	<field name="dataRvCorresp" class="java.lang.String"/>
+	<field name="valorCreditoOriginal" class="java.lang.String"/>
+	<field name="dataVencimentoOriginal" class="java.lang.String"/>
+	<field name="numParcelaTotal" class="java.lang.String"/>
+	<field name="valorBruto" class="java.lang.String"/>
+	<field name="valorTaxaDesconto" class="java.lang.String"/>
+	<field name="numPvOriginal" class="java.lang.String"/>
 	<field name="bandeira" class="java.lang.String"/>
-	<field name="valor_bruto_rv" class="java.lang.String"/>
-	<field name="valor_taxa_desconto" class="java.lang.String"/>
-	<field name="num_parcel_total" class="java.lang.String"/>
-	<field name="num_pv_original" class="java.lang.String"/>
 	<title>
 		<band height="74" splitType="Stretch">
 			<image scaleImage="FillFrame">
@@ -48,7 +47,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tipo Registro]]></text>
+				<text><![CDATA[Tipo do registro]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="240" y="0" width="140" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="ad8d9448-9c48-431e-9b6d-9e8a3b418096"/>
@@ -58,7 +57,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Número Documento]]></text>
+				<text><![CDATA[Número do PV]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="100" y="0" width="140" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="24ea8b9b-60ba-42b7-956c-629d1577b6aa"/>
@@ -68,7 +67,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Valor Lançamento]]></text>
+				<text><![CDATA[Número do documento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="380" y="0" width="210" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="903d8844-ca99-46aa-a4dc-63d7c75f84ac"/>
@@ -78,7 +77,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Número do PV Centralizador]]></text>
+				<text><![CDATA[Data do lançamento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="590" y="0" width="139" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="a334484d-97f9-4cc2-bf1e-4830c0155176"/>
@@ -88,7 +87,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Data Lançamento]]></text>
+				<text><![CDATA[Valor do lançamento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="730" y="0" width="90" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="54d75c8a-3038-43ae-9c3a-4545507a45a7"/>
@@ -98,7 +97,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Banco]]></text>
+				<text><![CDATA[C (Crédito)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="820" y="0" width="80" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="02f1a8c2-1fc7-4f2a-b026-8b39e52915ec"/>
@@ -108,7 +107,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Agência]]></text>
+				<text><![CDATA[Banco]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="900" y="0" width="90" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="4d1031b4-c3b7-4c3d-9fb2-26649477b2be"/>
@@ -118,7 +117,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Conta]]></text>
+				<text><![CDATA[Agência]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="990" y="0" width="110" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="a9212ee8-7193-4ae4-a739-81ce3aba1e86"/>
@@ -128,7 +127,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tipo Transação]]></text>
+				<text><![CDATA[Conta corrente]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1100" y="0" width="90" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="ef5a39a3-a561-4750-ad6f-2322b7d49a64"/>
@@ -138,7 +137,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Status Crédito]]></text>
+				<text><![CDATA[Número do RV correspondente]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1190" y="0" width="60" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="1c1aa6f1-5015-4faf-8e6f-f44edc53d462"/>
@@ -148,7 +147,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Crédito]]></text>
+				<text><![CDATA[Data do RV correspondente]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1250" y="0" width="110" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="0989bb7d-ca28-4141-8bb4-680524b612bc"/>
@@ -158,7 +157,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Data Movimento]]></text>
+				<text><![CDATA[Valor do crédito original]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1360" y="0" width="90" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="8fe775f2-fdc5-4e06-9f4e-91ec3260d1fd"/>
@@ -168,7 +167,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Número de RV]]></text>
+				<text><![CDATA[Data do vencimento original]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1450" y="0" width="80" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="ac4c0827-9888-4175-8db2-9ee1798f2600"/>
@@ -178,7 +177,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Data RV]]></text>
+				<text><![CDATA[Número da parcela/total]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1530" y="0" width="90" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="46daf30c-b8cc-4bd4-a956-763e2621e500"/>
@@ -188,7 +187,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Bandeira]]></text>
+				<text><![CDATA[Valor bruto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1620" y="0" width="120" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="e1c6412f-f22a-4573-a106-3529040d89ce"/>
@@ -198,7 +197,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Valor Bruto de RV]]></text>
+				<text><![CDATA[Valor da taxa de desconto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1740" y="0" width="150" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="7bc85d4f-3434-4b61-9093-e8e5809701be"/>
@@ -208,7 +207,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Valor Taxa Desconto]]></text>
+				<text><![CDATA[Número do PV original]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1890" y="0" width="200" height="28" forecolor="#FFFFFF" backcolor="#666666" uuid="925a4166-74be-4f62-9b23-a1ab608ba3ba"/>
@@ -218,6 +217,9 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
+<<<<<<<< HEAD:src/main/resources/jasper_templates/processamento_arquivo_036.jrxml
+				<text><![CDATA[Bandeira]]></text>
+========
 				<text><![CDATA[Número de Parcelas Total]]></text>
 			</staticText>
 			<staticText>
@@ -229,6 +231,7 @@
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Número de PV Original]]></text>
+>>>>>>>> bbf3cee978d1896fcb772d2f74382866a7b9734e:src/main/resources/jasperReport/processamento_arquivo_034.jrxml
 			</staticText>
 		</band>
 	</pageHeader>
@@ -244,7 +247,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{tipo_registro}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tipoRegistro}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="240" y="0" width="140" height="80" uuid="1d43336c-9127-4de8-ab45-065d673c9724"/>
@@ -255,7 +258,7 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{num_documento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{numPV}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="100" y="0" width="140" height="80" uuid="fe6a79f7-0056-4f53-b594-6decbe14ba40"/>
@@ -268,7 +271,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valor_lancamento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{numDocumento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="380" y="0" width="210" height="80" uuid="30352df1-ab67-40c4-8484-7bdff45f625f"/>
@@ -281,7 +284,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{num_pv_centralizador}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dataLancamento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="590" y="0" width="139" height="80" uuid="ee1a64bb-0e35-4e7d-883e-cac35b55dd1c"/>
@@ -294,7 +297,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{data_lancamento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valorLancamento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="730" y="0" width="90" height="80" uuid="c698c995-c26e-441d-baf5-cde5f9c4c24b"/>
@@ -307,7 +310,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{banco}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="820" y="0" width="80" height="80" uuid="ab474028-d45f-4cd7-9dff-303aa244349a"/>
@@ -320,7 +323,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{agencia}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{banco}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="900" y="0" width="90" height="80" uuid="804a845e-2089-469a-96c8-615e64908b19"/>
@@ -333,7 +336,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{conta}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{agencia}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="990" y="0" width="110" height="80" uuid="d88cc070-dbff-420c-8306-27cea47bf35a"/>
@@ -346,7 +349,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tipo_de_transacao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{conta}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1100" y="0" width="90" height="80" uuid="d0d76830-a9d1-448f-8a20-9c7256a80faa"/>
@@ -359,7 +362,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{status_credito}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{numRvCorresp}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1190" y="0" width="60" height="80" uuid="c44fa424-d8eb-45d0-9eb3-d1f3266e788d"/>
@@ -372,7 +375,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dataRvCorresp}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1250" y="0" width="110" height="80" uuid="e93dd2aa-8f20-4cc8-ad2a-c862d4b6aec2"/>
@@ -385,7 +388,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{data_movimento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valorCreditoOriginal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1360" y="0" width="90" height="80" uuid="a4e71862-7c9e-4475-a69f-0e42b4ca3f5a"/>
@@ -398,7 +401,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{num_rv}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dataVencimentoOriginal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1450" y="0" width="80" height="80" uuid="09d9cfcc-587e-42d4-8c2d-be35c8f35492"/>
@@ -411,7 +414,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{data_rv}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{numParcelaTotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1530" y="0" width="90" height="80" uuid="a397fc69-5095-4459-9766-9e74b8435057"/>
@@ -424,7 +427,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bandeira}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valorBruto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1620" y="0" width="120" height="80" uuid="0eff89d2-e750-4ded-8d5e-1fbd81a87342"/>
@@ -437,7 +440,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valor_bruto_rv}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{valorTaxaDesconto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1740" y="0" width="150" height="80" uuid="0518d297-5f10-41f9-a451-a463ce343cae"/>
@@ -450,7 +453,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{valor_taxa_desconto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{numPvOriginal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
 				<reportElement x="1890" y="0" width="200" height="80" uuid="8d517a13-04d5-4a0d-a6ba-5fb4d9bfbc14"/>
@@ -463,6 +466,9 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
+<<<<<<<< HEAD:src/main/resources/jasper_templates/processamento_arquivo_036.jrxml
+				<textFieldExpression><![CDATA[$F{bandeira}]]></textFieldExpression>
+========
 				<textFieldExpression><![CDATA[$F{num_parcel_total}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
@@ -477,6 +483,7 @@
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{num_pv_original}]]></textFieldExpression>
+>>>>>>>> bbf3cee978d1896fcb772d2f74382866a7b9734e:src/main/resources/jasperReport/processamento_arquivo_034.jrxml
 			</textField>
 		</band>
 	</detail>

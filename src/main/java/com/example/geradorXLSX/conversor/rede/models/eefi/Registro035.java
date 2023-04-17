@@ -24,15 +24,15 @@ public class Registro035 {
 	public String novoValorParcela;
 	public String valorOriginalParcela;
 	public String valorBrutoRvOriginal;
-	public String valorCancelamentoSolicitado;
-	public String numNsu;
+	public String valorCancelamentoSolicitado; 
+	public String numNsu;//aqui
 	public String numAutorizacao;
 	public String tipoDebito;
 	public String numOrdemDebito;
 	public String valorDebitoTotal;
 	public String valorPedente;
 	public String bandeiraRvOrigem;
-	public String bandeiraRvAjustado;
+	public String bandeiraRvAjustado;//aqui
 	public String numParcelaRvAjustado;
 	public String numParcelaRvOriginal;
 	public String dataRvAjustado;
